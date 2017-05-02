@@ -1,0 +1,193 @@
+; Barman, Backup and Recovery Manager for PostgreSQL
+; http://www.pgbarman.org/ - http://www.2ndQuadrant.com/
+;
+; Main configuration file
+
+[barman]
+; System user
+barman_user = {{ barman_user }}
+
+; Directory of configuration files. Place your sections in separate files with .conf extension
+; For example place the 'main' server section in /etc/barman.d/main.conf
+configuration_files_directory = "{{ barman_configuration_files_directory }}"
+
+; Main directory
+barman_home = "{{ barman_home }}"
+
+; Locks directory - default: %(barman_home)s
+{% if barman_lock_directory is defined -%}
+barman_lock_directory = "{{ barman_lock_directory }}"
+{%- endif %}
+
+; Log location
+log_file = "{{ barman_log_file }}"
+
+; Log level (see https://docs.python.org/3/library/logging.html#levels)
+log_level = "{{ barman_log_level }}"
+
+; Default compression level: possible values are None (default), bzip2, gzip, pigz, pygzip or pybzip2
+;compression = gzip
+{% if barman_compression is defined -%}
+compression = "{{ barman_compression }}"
+{%- endif %}
+
+; Pre/post backup hook scripts
+;pre_backup_script = env | grep ^BARMAN
+;pre_backup_retry_script = env | grep ^BARMAN
+;post_backup_retry_script = env | grep ^BARMAN
+;post_backup_script = env | grep ^BARMAN
+{% if barman_pre_backup_script is defined -%}
+pre_backup_script = "{{ barman_pre_backup_script }}"
+{%- endif %}
+{% if barman_pre_backup_retry_script is defined -%}
+pre_backup_retry_script = "{{ barman_pre_backup_retry_script }}"
+{%- endif %}
+{% if barman_post_backup_script is defined -%}
+post_backup_script = "{{ barman_post_backup_script }}"
+{%- endif %}
+{% if barman_post_backup_retry_script is defined -%}
+post_backup_retry_script = "{{ barman_post_backup_retry_script }}"
+{%- endif %}
+
+
+
+; Pre/post archive hook scripts
+;pre_archive_script = env | grep ^BARMAN
+;pre_archive_retry_script = env | grep ^BARMAN
+;post_archive_retry_script = env | grep ^BARMAN
+;post_archive_script = env | grep ^BARMAN
+{% if barman_pre_archive_script is defined -%}
+pre_archive_script = "{{ barman_pre_archive_script }}"
+{%- endif %}
+{% if barman_pre_archive_retry_script is defined -%}
+pre_archive_retry_script = "{{ barman_pre_archive_retry_script }}"
+{%- endif %}
+{% if barman_post_archive_script is defined -%}
+post_archive_script = "{{ barman_post_archive_script }}"
+{%- endif %}
+{% if barman_post_archive_retry_script is defined -%}
+post_archive_retry_script = "{{ barman_post_archive_retry_script }}"
+{%- endif %}
+
+
+
+; Global retention policy (REDUNDANCY or RECOVERY WINDOW) - default empty
+;retention_policy =
+{% if barman_retention_policy is defined -%}
+retention_policy = "{{ barman_retention_policy }}"
+{%- endif %}
+{% if barman_retention_policy_mode is defined -%}
+retention_policy_mode = "{{ barman_retention_policy_mode }}"
+{%- endif %}
+
+; Global bandwidth limit in KBPS - default 0 (meaning no limit)
+;bandwidth_limit = 4000
+{% if barman_bandwidth_limit is defined -%}
+bandwidth_limit = "{{ barman_bandwidth_limit }}"
+{%- endif %}
+
+; Immediate checkpoint for backup command - default false
+;immediate_checkpoint = false
+{% if barman_immediate_checkpoint is defined -%}
+immediate_checkpoint = "{{ barman_immediate_checkpoint }}"
+{%- endif %}
+
+; Enable network compression for data transfers - default false
+;network_compression = false
+{% if barman_network_compression is defined -%}
+network_compression = "{{ barman_network_compression }}"
+{%- endif %}
+
+; Number of retries of data copy during base backup after an error - default 0
+;basebackup_retry_times = 0
+{% if barman_basebackup_retry_times is defined -%}
+basebackup_retry_times = "{{ barman_basebackup_retry_times }}"
+{%- endif %}
+
+; Number of seconds of wait after a failed copy, before retrying - default 30
+;basebackup_retry_sleep = 30
+{% if barman_basebackup_retry_sleep is defined -%}
+basebackup_retry_sleep = "{{ barman_basebackup_retry_sleep }}"
+{%- endif %}
+
+; Maximum execution time, in seconds, per server
+; for a barman check command - default 30
+;check_timeout = 30
+{% if barman_check_timeout is defined -%}
+check_timeout = "{{ barman_check_timeout }}"
+{%- endif %}
+
+; Time frame that must contain the latest backup date.
+; If the latest backup is older than the time frame, barman check
+; command will report an error to the user.
+; If empty, the latest backup is always considered valid.
+; Syntax for this option is: "i (DAYS | WEEKS | MONTHS)" where i is an
+; integer > 0 which identifies the number of days | weeks | months of
+; validity of the latest backup for this check. Also known as 'smelly backup'.
+;last_backup_maximum_age =
+{% if barman_last_backup_maximum_age is defined -%}
+last_backup_maximum_age = "{{ barman_last_backup_maximum_age }}"
+{%- endif %}
+
+; Minimum number of required backups (redundancy)
+;minimum_redundancy = 1
+{% if barman_minimum_redundancy is defined -%}
+minimum_redundancy = "{{ barman_minimum_redundancy }}"
+{%- endif %}
+
+; Examples of retention policies
+; Retention policy (disabled)
+;retention_policy =
+; Retention policy (based on redundancy)
+;retention_policy = REDUNDANCY 2
+; Retention policy (based on recovery window)
+;retention_policy = RECOVERY WINDOW OF 4 WEEKS
+
+{% if barman_archiver is defined -%}
+archiver = "{{ barman_archiver }}"
+{%- endif %}
+{% if barman_archiver_batch_size is defined -%}
+archiver_batch_size = "{{ barman_archiver_batch_size }}"
+{%- endif %}
+{% if barman_backup_method is defined -%}
+backup_method = "{{ barman_backup_method }}"
+{%- endif %}
+{% if barman_backup_options is defined -%}
+backup_options = "{{ barman_backup_options }}"
+{%- endif %}
+{% if barman_custom_compression_filter is defined -%}
+custom_compression_filter = "{{ barman_custom_compression_filter }}"
+{%- endif %}
+{% if barman_custom_decompression_filter is defined -%}
+custom_decompression_filter = "{{ barman_custom_decompression_filter }}"
+{%- endif %}
+{% if barman_path_prefix is defined -%}
+path_prefix = "{{ barman_path_prefix }}"
+{%- endif %}
+{% if barman_recovery_options is defined -%}
+recovery_options = "{{ barman_recovery_options }}"
+{%- endif %}
+{% if barman_reuse_backup is defined -%}
+reuse_backup = "{{ barman_reuse_backup }}"
+{%- endif %}
+{% if barman_slot_name is defined -%}
+slot_name = "{{ barman_slot_name }}"
+{%- endif %}
+{% if barman_streaming_archiver is defined -%}
+streaming_archiver = "{{ barman_streaming_archiver }}"
+{%- endif %}
+{% if barman_streaming_archiver_batch_size is defined -%}
+streaming_archiver_batch_size = "{{ barman_streaming_archiver_batch_size }}"
+{%- endif %}
+{% if barman_streaming_archiver_name is defined -%}
+streaming_archiver_name = "{{ barman_streaming_archiver_name }}"
+{%- endif %}
+{% if barman_streaming_backup_name is defined -%}
+streaming_backup_name = "{{ barman_streaming_backup_name }}"
+{%- endif %}
+{% if barman_tablespace_bandwidth_limit is defined -%}
+tablespace_bandwidth_limit = "{{ barman_tablespace_bandwidth_limit }}"
+{%- endif %}
+{% if barman_wal_retention_policy is defined -%}
+wal_retention_policy = "{{ barman_wal_retention_policy }}"
+{%- endif %}

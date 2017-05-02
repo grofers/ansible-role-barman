@@ -1,0 +1,28 @@
+- name: Create cron for `barman cron`
+  cron:
+    user: "{{ barman_user }}"
+    name: "barman cron"
+    cron_file: barman_backup
+    job: "barman cron >> {{ barman_log_directory }}/cron.log"
+    state: present
+    disabled: "{{ barman_cron_disabled }}"
+    minute: "{{ barman_cron_schedule.minute }}"
+    hour: "{{ barman_cron_schedule.hour | default(omit) }}"
+    day: "{{ barman_cron_schedule.day | default(omit) }}"
+    month: "{{ barman_cron_schedule.month | default(omit) }}"
+    weekday: "{{ barman_cron_schedule.weekday | default(omit) }}"
+
+- name: Create cron job for backups
+  cron:
+    user: "{{ barman_user }}"
+    name: "barman backup server {{ item.name }}"
+    cron_file: barman_backup
+    job: "barman backup {{ item.name }} >> {{ barman_log_directory }}/{{ item.name }}.log"
+    state: present
+    disabled: "{{ item.cron_disabled | default(true) }}"
+    minute: "{{ item.cron_schedule.minute | default(omit) }}"
+    hour: "{{ item.cron_schedule.hour | default(omit) }}"
+    day: "{{ item.cron_schedule.day | default(omit) }}"
+    month: "{{ item.cron_schedule.month | default(omit) }}"
+    weekday: "{{ item.cron_schedule.weekday | default(omit) }}"
+  with_items: "{{ barman_server_configuration }}"

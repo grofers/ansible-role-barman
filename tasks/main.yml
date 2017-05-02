@@ -1,0 +1,11 @@
+---
+# tasks file for ansible-role-barman
+
+- include: install.yml
+  tags: [barman, barman-install]
+
+- include: configure.yml
+  tags: [barman, barman-configure]
+
+- include: cron.yml
+  tags: [barman, barman-cron]

@@ -1,0 +1,21 @@
+galaxy_info:
+  author: Vishesh Jindal
+  description: Ansible role which installs and configures barman by 2ndQuadrant
+  company: Grofers
+  license: MIT
+  min_ansible_version: 2.1
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+
+  galaxy_tags:
+    - 'barman'
+    - 'pgbarman'
+    - 'postgres'
+    - 'postgresql'
+
+dependencies: []

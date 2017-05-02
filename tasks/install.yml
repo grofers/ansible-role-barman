@@ -1,0 +1,63 @@
+# file: ansible-role-barman/tasks/install.yml
+
+# The standard ca-certs are needed because  without them apt_key will fail to
+# validate www.postgresql.org (or probably any other source).
+- name: Make sure the CA certificates are available
+  apt:
+    pkg: ca-certificates
+    state: present
+
+- name: Add PostgreSQL repository apt-key
+  apt_key:
+    id: "{{ barman_postgresql_apt_key_id }}"
+    url: "{{ barman_postgresql_apt_key_url }}"
+    state: present
+  when: barman_postgresql_apt_key_url and barman_postgresql_apt_key_id
+
+- name: Add PostgreSQL repository
+  apt_repository:
+    repo: "{{ barman_postgresql_apt_repository }}"
+    state: present
+  when: barman_postgresql_apt_repository | default('') != ''
+
+- name: Add PostgreSQL repository preferences
+  template:
+    src: etc_apt_preferences.d_apt_postgresql_org_pub_repos_apt.pref.j2
+    dest: /etc/apt/preferences.d/apt_postgresql_org_pub_repos_apt.pref
+  when: barman_postgresql_apt_pin_priority
+
+- name: Make sure the dependencies are installed
+  apt:
+    pkg: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_time | default (3600) }}"
+  with_items: "{{ barman_apt_packages }}"
+
+- name: Install PostgreSQL Client
+  apt:
+    name: "postgresql-client"
+    state: present
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_time | default (3600) }}"
+
+- name: Install Barman
+  apt:
+    name: "barman"
+    state: present
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_time | default (3600) }}"
+  when: not barman_client_only
+
+- name: Install Barman CLI
+  apt:
+    name: "barman-cli"
+    state: present
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_time | default (3600) }}"
+  when: barman_client_only
+
+- name: Install pip packages
+  pip:
+    name: "{{ item }}"
+  with_items: "{{ barman_pip_packages }}"

@@ -1,0 +1,12 @@
+- name: Setup Barman Config
+  template:
+    src: barman.conf.j2
+    dest: "/etc/barman.conf"
+    mode: 0644
+
+- name: Setup Barman Server Config
+  template:
+    src: server.conf.j2
+    dest: "{{ barman_server_config_files_directory }}/{{ item.name }}"
+    mode: 0644
+  with_items: "{{ barman_server_configuration | default([]) }}"
