@@ -1,4 +1,4 @@
-grofers.ansible-role-barman
+grofers.ansible-role-barman [![Build Status](https://travis-ci.org/grofers/ansible-role-barman.svg?branch=master)](https://travis-ci.org/grofers/ansible-role-barman)
 =========
 
 💥 Battle-tested at [Grofers](https://grofers.com/)
