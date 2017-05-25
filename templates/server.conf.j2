@@ -1,0 +1,154 @@
+[{{ item.name }}]
+active = "{{ item.active | default(true)}}"
+; Human readable description
+description = "{{ item.description }}"
+
+; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; SSH options (mandatory)
+; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ssh_command = {{ item.ssh_command }}
+
+; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; PostgreSQL connection string (mandatory)
+; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+conninfo = {{ item.conninfo }}
+{% if item.streaming_conninfo is defined -%}
+streaming_conninfo = {{ item.streaming_conninfo }}
+{%- endif %}
+
+; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Backup settings (via rsync over SSH)
+; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+{% if item.backup_method is defined -%}
+backup_method = "{{ item.backup_method }}"
+{%- endif %}
+; Incremental backup support: possible values are None (default), link or copy
+{% if item.reuse_backup is defined -%}
+reuse_backup = "{{ item.reuse_backup }}"
+{%- endif %}
+; Identify the standard behavior for backup operations: possible values are
+; exclusive_backup (default), concurrent_backup
+{% if item.backup_options is defined -%}
+backup_options = "{{ item.backup_options }}"
+{%- endif %}
+
+{% if item.incoming_wals_directory is defined -%}
+incoming_wals_directory = "{{ item.incoming_wals_directory}}"
+{%- endif %}
+{% if item.streaming_wals_directory is defined -%}
+streaming_wals_directory = "{{ item.streaming_wals_directory }}"
+{%- endif %}
+{% if item.wals_directory is defined -%}
+wals_directory = "{{ item.wals_directory }}"
+{%- endif %}
+{% if item.backup_directory is defined -%}
+backup_directory = "{{ item.backup_directory }}"
+{%- endif %}
+{% if item.basebackups_directory is defined -%}
+basebackups_directory = "{{ item.basebackups_directory }}"
+{%- endif %}
+{% if item.errors_directory is defined -%}
+errors_directory = "{{ item.errors_directory }}"
+{%- endif %}
+
+
+; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Continuous WAL archiving (via 'archive_command')
+; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+archiver = {{ item.archiver | default('on')}}
+{% if item.archiver_batch_size is defined -%}
+archiver_batch_size = {{ item.archiver_batch_size }}
+{%- endif %}
+
+; PATH setting for this server
+{% if item.path_prefix is defined -%}
+path_prefix = "{{ item.path_prefix }}"
+{%- endif %}
+
+{% if item.bandwidth_limit is defined -%}
+bandwidth_limit = "{{ item.bandwidth_limit }}"
+{%- endif %}
+{% if item.basebackup_retry_sleep is defined -%}
+basebackup_retry_sleep = "{{ item.basebackup_retry_sleep }}"
+{%- endif %}
+{% if item.basebackup_retry_times is defined -%}
+basebackup_retry_times = "{{ item.basebackup_retry_times }}"
+{%- endif %}
+{% if item.check_timeout is defined -%}
+check_timeout = "{{ item.check_timeout }}"
+{%- endif %}
+{% if item.compression is defined -%}
+compression = "{{ item.compression }}"
+{%- endif %}
+{% if item.custom_compression_filter is defined -%}
+custom_compression_filter = "{{ item.custom_compression_filter }}"
+{%- endif %}
+{% if item.custom_decompression_filter is defined -%}
+custom_decompression_filter = "{{ item.custom_decompression_filter }}"
+{%- endif %}
+{% if item.immediate_checkpoint is defined -%}
+immediate_checkpoint = "{{ item.immediate_checkpoint }}"
+{%- endif %}
+{% if item.last_backup_maximum_age is defined -%}
+last_backup_maximum_age = "{{ item.last_backup_maximum_age }}"
+{%- endif %}
+{% if item.minimum_redundancy is defined -%}
+minimum_redundancy = "{{ item.minimum_redundancy }}"
+{%- endif %}
+{% if item.network_compression is defined -%}
+network_compression = "{{ item.network_compression }}"
+{%- endif %}
+{% if item.post_archive_retry_script is defined -%}
+post_archive_retry_script = "{{ item.post_archive_retry_script }}"
+{%- endif %}
+{% if item.post_archive_script is defined -%}
+post_archive_script = "{{ item.post_archive_script }}"
+{%- endif %}
+{% if item.post_backup_retry_script is defined -%}
+post_backup_retry_script = "{{ item.post_backup_retry_script }}"
+{%- endif %}
+{% if item.post_backup_script is defined -%}
+post_backup_script = "{{ item.post_backup_script }}"
+{%- endif %}
+{% if item.pre_archive_retry_script is defined -%}
+pre_archive_retry_script = "{{ item.pre_archive_retry_script }}"
+{%- endif %}
+{% if item.pre_archive_script is defined -%}
+pre_archive_script = "{{ item.pre_archive_script }}"
+{%- endif %}
+{% if item.pre_backup_retry_script is defined -%}
+pre_backup_retry_script = "{{ item.pre_backup_retry_script }}"
+{%- endif %}
+{% if item.pre_backup_script is defined -%}
+pre_backup_script = "{{ item.pre_backup_script }}"
+{%- endif %}
+{% if item.recovery_options is defined -%}
+recovery_options = "{{ item.recovery_options }}"
+{%- endif %}
+{% if item.retention_policy is defined -%}
+retention_policy = "{{ item.retention_policy }}"
+{%- endif %}
+{% if item.retention_policy_mode is defined -%}
+retention_policy_mode = "{{ item.retention_policy_mode }}"
+{%- endif %}
+{% if item.slot_name is defined -%}
+slot_name = "{{ item.slot_name }}"
+{%- endif %}
+{% if item.streaming_archiver is defined -%}
+streaming_archiver = "{{ item.streaming_archiver }}"
+{%- endif %}
+{% if item.streaming_archiver_batch_size is defined -%}
+streaming_archiver_batch_size = "{{ item.streaming_archiver_batch_size }}"
+{%- endif %}
+{% if item.streaming_archiver_name is defined -%}
+streaming_archiver_name = "{{ item.streaming_archiver_name }}"
+{%- endif %}
+{% if item.streaming_backup_name is defined -%}
+streaming_backup_name = "{{ item.streaming_backup_name }}"
+{%- endif %}
+{% if item.tablespace_bandwidth_limit is defined -%}
+tablespace_bandwidth_limit = "{{ item.tablespace_bandwidth_limit }}"
+{%- endif %}
+{% if item.wal_retention_policy is defined -%}
+wal_retention_policy = "{{ item.wal_retention_policy }}"
+{%- endif %}

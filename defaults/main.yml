@@ -1,0 +1,139 @@
+---
+# defaults file for ansible-role-barman
+
+barman_client_only: no
+
+# APT settings
+barman_postgresql_apt_key_id: ACCC4CF8
+barman_postgresql_apt_key_url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+barman_postgresql_apt_repository: "deb http://apt.postgresql.org/pub/repos/apt/ {{ansible_distribution_release}}-pgdg main"
+
+## Pin-Priority of PGDG repository
+barman_postgresql_apt_pin_priority: 500
+
+# Cron Configuration
+barman_cron_disabled: false
+
+## Run barman cron every minute
+barman_cron_schedule:
+  minute: "*"
+  hour: "*"
+  day: "*"
+  weekday: "*"
+  month: "*"
+
+# Barman Config
+barman_user: "barman"
+barman_configuration_files_directory: "/etc/barman.d"
+
+barman_server_config_files_directory: "{{ barman_configuration_files_directory }}"  # directory to place configuration files
+barman_home: "/var/lib/barman"
+barman_log_directory: "/var/log/barman"
+barman_log_file: "{{ barman_log_directory }}/barman.log"
+barman_log_level: "INFO"
+
+barman_server_configuration: []
+
+###########
+# Example #
+###########
+# barman_server_configuration:
+#   - name: ssh
+#     description: "Example of PostgreSQL Database (via SSH)"
+#     ssh_command: "ssh postgres@pg"
+#     conninfo: "host=pg user=barman dbname=postgres"
+#     archiver: "on"
+#     archiver_batch_size: 50
+#     cron_disabled: false
+#     cron_schedule:
+#       minute: "0"
+#       hour: "0"
+#       day: "*"
+#       month: "*"
+#       weekday: "*"
+
+#################################
+# Optional Server Configuration #
+#################################
+#     streaming_conninfo: "host=pg user=barman dbname=postgres"
+#     backup_method: "rsync"
+#     reuse_backup: "None"
+#     backup_options: "exclusive_backup"
+#     incoming_wals_directory: ""
+#     streaming_wals_directory: ""
+#     wals_directory: ""
+#     backup_directory: ""
+#     basebackups_directory: ""
+#     errors_directory: ""
+#     archiver_batch_size: 0
+#     path_prefix: ""
+#     bandwidth_limit: 4000
+#     basebackup_retry_sleep: 30
+#     basebackup_retry_times: 0
+#     check_timeout: 30
+#     compression: gzip
+#     custom_compression_filter: ""
+#     custom_decompression_filter: ""
+#     immediate_checkpoint: false
+#     last_backup_maximum_age:  "1 WEEK"
+#     minimum_redundancy: 1
+#     network_compression: false
+#     post_archive_retry_script: "env | grep ^BARMAN"
+#     post_archive_script: "env | grep ^BARMAN"
+#     post_backup_retry_script: "env | grep ^BARMAN"
+#     post_backup_script: "env | grep ^BARMAN"
+#     pre_archive_retry_script: "env | grep ^BARMAN"
+#     pre_archive_script: "env | grep ^BARMAN"
+#     pre_backup_retry_script: "env | grep ^BARMAN"
+#     pre_backup_script: "env | grep ^BARMAN"
+#     recovery_options: ""
+#     retention_policy: ""
+#     retention_policy_mode: "AUTO"
+#     slot_name: ""
+#     streaming_archiver: "off"
+#     streaming_archiver_batch_size: 0
+#     streaming_archiver_name: barman_receive_wal
+#     streaming_backup_name: barman_streaming_backup
+#     tablespace_bandwidth_limit: 0
+#     wal_retention_policy: "MAIN"
+
+#################################
+# Optional barman configuration #
+#################################
+
+# barman_lock_directory: "%(barman_home)s"
+# barman_compression: gzip
+# barman_pre_backup_script: "env | grep ^BARMAN"
+# barman_pre_backup_retry_script: "env | grep ^BARMAN"
+# barman_post_backup_script: "env | grep ^BARMAN"
+# barman_post_backup_retry_script: "env | grep ^BARMAN"
+# barman_pre_archive_script: "env | grep ^BARMAN"
+# barman_pre_archive_retry_script: "env | grep ^BARMAN"
+# barman_post_archive_script: "env | grep ^BARMAN"
+# barman_post_archive_retry_script: "env | grep ^BARMAN"
+# barman_retention_policy: ""
+# barman_retention_policy_mode: "auto"
+# barman_bandwidth_limit: 4000
+# barman_immediate_checkpoint: false
+# barman_network_compression: false
+# barman_basebackup_retry_times: 0
+# barman_basebackup_retry_sleep: 30
+# barman_check_timeout: 30
+# barman_last_backup_maximum_age: "1 WEEK"
+# barman_minimum_redundancy: 1
+# barman_archiver: "on"
+# barman_archiver_batch_size: 0
+# barman_backup_method: "rsync"
+# barman_backup_options: "exclusive_backup"
+# barman_custom_compression_filter: ""
+# barman_custom_decompression_filter: ""
+# barman_path_prefix: ""
+# barman_recovery_options: ""
+# barman_reuse_backup: "off"
+# barman_slot_name: ""
+# barman_streaming_archiver: "off"
+# barman_streaming_archiver_batch_size: 0
+# barman_streaming_archiver_name: barman_receive_wal
+# barman_streaming_backup_name: barman_streaming_backup
+# barman_tablespace_bandwidth_limit: 0
+# barman_wal_retention_policy: "MAIN"
