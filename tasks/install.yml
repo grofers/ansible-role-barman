@@ -22,7 +22,7 @@
 
 - name: Add PostgreSQL repository preferences
   template:
-    src: etc_apt_preferences.d_apt_postgresql_org_pub_repos_apt.pref.j2
+    src: apt_postgresql_org_pub_repos_apt.pref.j2
     dest: /etc/apt/preferences.d/apt_postgresql_org_pub_repos_apt.pref
   when: barman_postgresql_apt_pin_priority
 
