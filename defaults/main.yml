@@ -40,8 +40,11 @@ barman_server_configuration: []
 # barman_server_configuration:
 #   - name: ssh
 #     description: "Example of PostgreSQL Database (via SSH)"
-#     ssh_command: "ssh postgres@pg"
-#     conninfo: "host=pg user=barman dbname=postgres"
+#     backup_method: "rsync"
+#     host: db-01.srv.org
+#     backup_user: barman
+#     streaming_user: streaming_barman
+#     systemdbname: postgres
 #     archiver: "on"
 #     archiver_batch_size: 50
 #     cron_disabled: false
@@ -55,8 +58,6 @@ barman_server_configuration: []
 #################################
 # Optional Server Configuration #
 #################################
-#     streaming_conninfo: "host=pg user=barman dbname=postgres"
-#     backup_method: "rsync"
 #     reuse_backup: "None"
 #     backup_options: "exclusive_backup"
 #     incoming_wals_directory: ""

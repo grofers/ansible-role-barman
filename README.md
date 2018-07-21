@@ -12,12 +12,47 @@ Installation
 
 This has been tested on Ansible 2.1.0 and higher.
 To install:
+
 ```bash
 ansible-galaxy install grofers.barman
 ```
 
 Role Variables
 --------------
+
+define of server list for backup:
+
+```yaml
+barman_server_configuration:
+```
+
+Settings for server:
+
+name of reserved server
+
+```yaml
+  - name: ssh
+```
+
+```yaml
+description: "Example of PostgreSQL Database (via SSH)"
+```
+
+```yaml
+conninfo: "host=pg user=barman dbname=postgres"
+```
+
+Define backup method (rsync|postgres)
+
+```yaml
+backup_method: "rsync"
+```
+
+If method rsync
+
+```yaml
+ssh_command: "ssh postgres@pg"
+```
 
 ```yaml
 # defaults file for ansible-role-barman
