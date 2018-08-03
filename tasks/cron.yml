@@ -2,7 +2,7 @@
   cron:
     user: "{{ barman_user }}"
     name: "barman cron"
-    cron_file: barman_backup
+    cron_file: barman
     job: "barman cron >> {{ barman_log_directory }}/cron.log"
     state: present
     disabled: "{{ barman_cron_disabled }}"
@@ -16,7 +16,7 @@
   cron:
     user: "{{ barman_user }}"
     name: "barman backup server {{ item.name }}"
-    cron_file: barman_backup
+    cron_file: barman
     job: "barman backup {{ item.name }} >> {{ barman_log_directory }}/{{ item.name }}.log"
     state: present
     disabled: "{{ item.cron_disabled | default(true) }}"

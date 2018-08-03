@@ -7,6 +7,14 @@
 - name: Setup Barman Server Config
   template:
     src: server.conf.j2
-    dest: "{{ barman_server_config_files_directory }}/{{ item.name }}"
+    dest: "{{ barman_server_config_files_directory }}/{{ item.name }}.conf"
     mode: 0644
   with_items: "{{ barman_server_configuration | default([]) }}"
+
+- name: Create slot for Barman
+  shell: /usr/bin/barman receive-wal --create-slot {{ item.name }}
+  ignore_errors: yes
+  become_user: "{{ barman_user }}"
+  with_items: "{{ barman_server_configuration }}"
+  when: 
+    - item.backup_method == "postgres"
