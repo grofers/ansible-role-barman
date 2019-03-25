@@ -6,6 +6,7 @@ barman_apt_packages:
   - python
   - python-psycopg2
   - python-pycurl
+  - python-pip
 
 barman_pip_packages:
   - argcomplete
