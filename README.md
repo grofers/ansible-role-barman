@@ -1,4 +1,4 @@
-grofers.ansible-role-barman [![Build Status](https://travis-ci.org/grofers/ansible-role-barman.svg?branch=master)](https://travis-ci.org/grofers/ansible-role-barman)
+grofers.ansible-role-barman [![Build Status](https://travis-ci.org/FLiPp3r90/ansible-role-barman.svg?branch=master)](https://travis-ci.org/FLiPp3r90/ansible-role-barman)
 =========
 
 💥 Battle-tested at [Grofers](https://grofers.com/)
@@ -104,6 +104,10 @@ barman_server_configuration:
 ```
 There are a lot more optional variables, please see defaults/main.yml for all
 of them.
+
+Dependencies
+------------
+You have to set the correct repository for all packages.
 
 Example Playbook
 ----------------
