@@ -2,13 +2,25 @@
 language: python
 python: "2.7"
 cache: pip
+dist: trusty
+services:
+  - docker
 
 # Use the new container infrastructure
 sudo: false
 
+# Set environment
+env:
+  matrix:
+    - IMAGE_NAME="ubuntu:16.04-builded"
+    - IMAGE_NAME="debian:8-builded"
+    - IMAGE_NAME="debian:9-builded"
+    - IMAGE_NAME="centos:7-builded"
+    - IMAGE_NAME="centos:6-builded"
+
 # Install ansible
 addons:
-  apt:
+  package:
     packages:
     - python-pip
 

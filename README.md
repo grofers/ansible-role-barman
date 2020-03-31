@@ -124,3 +124,4 @@ Author Information
 ------------------
 
 [vishesh92](github.com/vishesh92)
+[Filip Krahl](https://github.com/FLiPp3r90)

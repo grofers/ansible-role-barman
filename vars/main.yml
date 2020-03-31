@@ -1,15 +1,17 @@
 ---
 # vars file for ansible-role-barman
 
-barman_apt_packages:
-  - rsync
-  - python
-  - python-psycopg2
-  - python-pycurl
+# Deprecated in feuture ansible release
+# barman_apt_packages:
+#   - rsync
+#   - python
+#   - python-psycopg2
+#   - python-pycurl
 
-barman_pip_packages:
-  - argcomplete
-  - argh
-  - psycopg2
-  - python-dateutil
-  - setuptools
+# Deprecated in feuture ansible release
+# barman_pip_packages:
+#   - argcomplete
+#   - argh
+#   - psycopg2
+#   - python-dateutil
+#   - setuptools
