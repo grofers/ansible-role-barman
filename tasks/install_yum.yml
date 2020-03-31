@@ -1,9 +1,8 @@
 # file: ansible-role-barman/tasks/install.yml
 - name: Make sure the dependencies are installed
   yum:
-    name: "{{ item }}"
+    name: "{{ barman_yum_packages }}"
     state: present
-  with_items: "{{ barman_yum_packages }}"
 
 - name: Install PostgreSQL Client
   yum:
