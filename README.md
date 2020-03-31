@@ -1,4 +1,4 @@
-grofers.ansible-role-barman [![Build Status](https://travis-ci.org/FLiPp3r90/ansible-role-barman.svg?branch=master)](https://travis-ci.org/FLiPp3r90/ansible-role-barman)
+grofers.ansible-role-barman [![Build Status](https://travis-ci.org/grofers/ansible-role-barman.svg?branch=master)](https://travis-ci.org/grofers/ansible-role-barman)
 =========
 
 💥 Battle-tested at [Grofers](https://grofers.com/)
@@ -128,4 +128,3 @@ Author Information
 ------------------
 
 [vishesh92](github.com/vishesh92)
-[Filip Krahl](https://github.com/FLiPp3r90)
