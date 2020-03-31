@@ -27,7 +27,7 @@ log_level = "{{ barman_log_level }}"
 
 ; One or more absolute paths, separated by colon, where Barman looks for executable files.
 ; The paths specified in path_prefix are tried before the ones specified in PATH environment variable.
-path_prefix = "{{ barman_pg_bin_dir }}"
+path_prefix = "{{ barman_path_prefix }}"
 
 ; Default compression level: possible values are None (default), bzip2, gzip, pigz, pygzip or pybzip2
 ;compression = gzip

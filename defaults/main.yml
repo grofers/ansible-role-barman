@@ -34,7 +34,7 @@ barman_log_level: "INFO"
 
 barman_server_configuration: []
 
-barman_pg_bin_dir: '/usr/pgsql-12/bin/'
+barman_path_prefix: '/usr/pgsql-12/bin/'
 
 ###########
 # Example #
