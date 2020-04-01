@@ -28,11 +28,10 @@
 
 - name: Make sure the dependencies are installed
   apt:
-    pkg: "{{ item }}"
+    pkg: "{{ barman_apt_packages }}"
     state: present
     update_cache: yes
     cache_valid_time: "{{ apt_cache_valid_time | default (3600) }}"
-  with_items: "{{ barman_apt_packages }}"
 
 - name: Install PostgreSQL Client
   apt:
@@ -59,5 +58,4 @@
 
 - name: Install pip packages
   pip:
-    name: "{{ item }}"
-  with_items: "{{ barman_pip_packages }}"
+    name: "{{ barman_pip_packages }}"

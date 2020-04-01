@@ -1,7 +1,12 @@
 ---
 # tasks file for ansible-role-barman
 
-- include: install.yml
+- include: install_apt.yml
+  when: ansible_pkg_mgr == "apt"
+  tags: [barman, barman-install]
+
+- include: install_yum.yml
+  when: ansible_pkg_mgr == "yum" and ( ansible_distribution == "RedHat" or ansible_distribution == "CentOS" or ansible_distribution == "OracleLinux")
   tags: [barman, barman-install]
 
 - include: configure.yml

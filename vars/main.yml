@@ -13,3 +13,13 @@ barman_pip_packages:
   - psycopg2
   - python-dateutil
   - setuptools
+
+barman_yum_packages:
+  - rsync
+  - python
+  - python2-argh
+  - python-argcomplete
+  - python2-configargparse
+  - python-psycopg2
+  - python-dateutil
+  - python-setuptools

@@ -1,0 +1,22 @@
+# file: ansible-role-barman/tasks/install.yml
+- name: Make sure the dependencies are installed
+  yum:
+    name: "{{ barman_yum_packages }}"
+    state: present
+
+- name: Install PostgreSQL Client
+  yum:
+    name: "postgresql12"
+    state: present
+
+- name: Install Barman
+  yum:
+    name: "barman"
+    state: present
+  when: not barman_client_only
+
+- name: Install Barman CLI
+  yum:
+    name: "barman-cli"
+    state: present
+  when: barman_client_only
